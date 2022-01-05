@@ -1,0 +1,31 @@
+builds:
+  - binary: remembrall
+    id: remembrall
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+    main: ./main-cli/main/
+  - binary: seeker
+    id: seeker
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+    main: ./seeker/cmd/
+archives:
+  - replacements:
+      darwin: Darwin
+      linux: Linux
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'   
